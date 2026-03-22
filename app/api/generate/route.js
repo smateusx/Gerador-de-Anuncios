@@ -3,6 +3,9 @@ import { generateAdsPayload } from "@/lib/ai";
 
 export const runtime = "nodejs";
 
+/** Limite de execução em hosts serverless (ex.: Vercel). O plano gratuito pode impor um teto menor. */
+export const maxDuration = 60;
+
 const REQUIRED = [
   "productName",
   "valueProposition",

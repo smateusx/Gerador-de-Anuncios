@@ -116,6 +116,11 @@ Implementado em `app/page.js` + `components/AdGeneratorClient.js`: formulário, 
 
 `lib/localPersist.js` grava formulário e última resposta da API com chaves versionadas. Não substitui servidor nem sincroniza entre dispositivos.
 
-## 10. Próximas melhorias
+## 10. Passo 6 (deploy Vercel)
 
-Testes, deploy (ex.: Vercel), fase B (auth + BD).
+- **Documentação:** [README.md](README.md) — import do repo GitHub, variáveis `OPENAI_API_KEY` / `OPENAI_MODEL`, notas sobre limites de tempo em serverless.
+- **Código:** `app/api/generate/route.js` exporta `maxDuration` (60s) para alinhar com hospedagens serverless; o plano pode impor um teto inferior.
+
+## 11. Próximas melhorias
+
+Testes automatizados, fase B (auth + BD), pagamentos, integrações Meta/Google Ads API.

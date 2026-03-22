@@ -88,6 +88,10 @@ Concluído na UI: **exportar JSON/CSV** dos resultados e **contagem de caractere
 
 Rascunho do formulário e último resultado guardados em **localStorage** neste navegador (`lib/localPersist.js`), com opção de limpar — sem base de dados nem conta.
 
-## 12. Próximo passo (evolução)
+## 12. Passo 6 (deploy)
 
-Fase B (contas e histórico na nuvem), testes automatizados, deploy (ex.: Vercel).
+Documentação de **deploy na Vercel** e requisitos de ambiente no **[README.md](README.md)**; `maxDuration` na rota API para serverless. O projeto não inclui ficheiros de configuração obrigatórios da Vercel — o Next.js é detetado automaticamente.
+
+## 13. Próximo passo (evolução)
+
+Fase B (contas e histórico na nuvem), testes automatizados, pagamentos ou integrações com APIs Meta/Google.
