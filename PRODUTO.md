@@ -84,6 +84,10 @@ Concluído: página inicial com formulário (`components/AdGeneratorClient.js`),
 
 Concluído na UI: **exportar JSON/CSV** dos resultados e **contagem de caracteres** vs limites orientadores (`lib/exportResult.js`, `result.limits`).
 
-## 11. Próximo passo (evolução)
+## 11. Passo 5 (persistência local)
 
-Fase B (contas e histórico), testes automatizados, deploy (ex.: Vercel), ou refinamentos de UX.
+Rascunho do formulário e último resultado guardados em **localStorage** neste navegador (`lib/localPersist.js`), com opção de limpar — sem base de dados nem conta.
+
+## 12. Próximo passo (evolução)
+
+Fase B (contas e histórico na nuvem), testes automatizados, deploy (ex.: Vercel).

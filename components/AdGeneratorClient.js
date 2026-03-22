@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { downloadResultCsv, downloadResultJson } from "@/lib/exportResult";
+import { clearPersisted, loadPersisted, saveFormState, saveResultState } from "@/lib/localPersist";
 
 const initialForm = {
   productName: "",
@@ -47,9 +48,45 @@ export default function AdGeneratorClient() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
+  const [persistReady, setPersistReady] = useState(false);
+  const [restoredBanner, setRestoredBanner] = useState(false);
+
+  useEffect(() => {
+    const { form: savedForm, result: savedResult, hadAny } = loadPersisted();
+    if (savedForm && typeof savedForm === "object") {
+      setForm({
+        ...initialForm,
+        ...savedForm,
+        variationCount: Math.min(5, Math.max(1, Number(savedForm.variationCount) || 3)),
+        platforms: savedForm.platforms ?? initialForm.platforms,
+      });
+    }
+    if (savedResult && typeof savedResult === "object") {
+      setResult(savedResult);
+    }
+    if (hadAny) setRestoredBanner(true);
+    setPersistReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!persistReady) return;
+    saveFormState(form);
+  }, [form, persistReady]);
+
+  useEffect(() => {
+    if (!persistReady) return;
+    saveResultState(result);
+  }, [result, persistReady]);
 
   function updateField(name, value) {
     setForm((f) => ({ ...f, [name]: value }));
+  }
+
+  function handleClearStored() {
+    clearPersisted();
+    setForm(initialForm);
+    setResult(null);
+    setRestoredBanner(false);
   }
 
   async function handleSubmit(e) {
@@ -94,7 +131,23 @@ export default function AdGeneratorClient() {
           Preencha os campos abaixo. A IA gera textos para <strong>Meta Ads</strong> e/ou{" "}
           <strong>Google Ads</strong> — reveja sempre antes de publicar.
         </p>
+        <p className="lede-meta">
+          O rascunho e o último resultado são guardados <strong>só neste navegador</strong> (localStorage),
+          sem servidor.{" "}
+          <button type="button" className="link-button" onClick={handleClearStored}>
+            Limpar dados guardados
+          </button>
+        </p>
       </header>
+
+      {restoredBanner && (
+        <div className="banner banner-restored" role="status">
+          Recuperámos o rascunho e/ou o último resultado deste dispositivo.{" "}
+          <button type="button" className="link-button" onClick={() => setRestoredBanner(false)}>
+            Fechar
+          </button>
+        </div>
+      )}
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-grid">

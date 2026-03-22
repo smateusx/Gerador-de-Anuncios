@@ -112,6 +112,10 @@ Implementado em `app/page.js` + `components/AdGeneratorClient.js`: formulário, 
 - **JSON / CSV:** botões em `AdGeneratorClient` chamam `downloadResultJson` / `downloadResultCsv` em `lib/exportResult.js` (CSV com BOM UTF-8 para Excel).
 - **Caracteres:** `CharCount` compara comprimento do texto com `result.limits` (Meta e Google).
 
-## 9. Próximas melhorias
+## 9. Passo 5 (localStorage)
+
+`lib/localPersist.js` grava formulário e última resposta da API com chaves versionadas. Não substitui servidor nem sincroniza entre dispositivos.
+
+## 10. Próximas melhorias
 
 Testes, deploy (ex.: Vercel), fase B (auth + BD).
