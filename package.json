@@ -1,0 +1,10 @@
+{
+  "name": "gerador-de-anuncios",
+  "version": "0.1.0",
+  "description": "SaaS para gerar anúncios com IA para Meta Ads e Google Ads",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  }
+}
