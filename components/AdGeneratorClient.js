@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { downloadResultCsv, downloadResultJson } from "@/lib/exportResult";
 
 const initialForm = {
   productName: "",
@@ -26,6 +27,18 @@ function CopyButton({ label, text }) {
     <button type="button" className="btn-copy" onClick={() => copyText(text)} disabled={!text}>
       {label}
     </button>
+  );
+}
+
+/** Contagem de caracteres vs limite (referência em `result.limits`). */
+function CharCount({ text, max }) {
+  if (max == null || max === "") return null;
+  const n = (text || "").length;
+  const over = n > max;
+  return (
+    <span className={over ? "char-count char-count-over" : "char-count"} title="Caracteres / limite orientador">
+      {n} / {max}
+    </span>
   );
 }
 
@@ -184,7 +197,17 @@ export default function AdGeneratorClient() {
 
       {result && (
         <section className="results" aria-live="polite">
-          <h2>Resultados</h2>
+          <div className="results-head">
+            <h2>Resultados</h2>
+            <div className="export-toolbar">
+              <button type="button" className="btn-secondary" onClick={() => downloadResultJson(result)}>
+                Exportar JSON
+              </button>
+              <button type="button" className="btn-secondary" onClick={() => downloadResultCsv(result)}>
+                Exportar CSV
+              </button>
+            </div>
+          </div>
 
           <div className="disclaimer-box">
             <p>
@@ -207,6 +230,7 @@ export default function AdGeneratorClient() {
             <div className="platform-block">
               <h3>Meta Ads</h3>
               {result.meta.variations.map((v) => {
+                const ml = result.limits?.meta || {};
                 const block = [
                   `Texto principal: ${v.primaryText || ""}`,
                   `Título: ${v.headline || ""}`,
@@ -221,28 +245,36 @@ export default function AdGeneratorClient() {
                     </div>
                     <dl className="copy-fields">
                       <div>
-                        <dt>Texto principal</dt>
+                        <dt>
+                          Texto principal <CharCount text={v.primaryText} max={ml.primaryText} />
+                        </dt>
                         <dd>
                           <span className="text-block">{v.primaryText}</span>
                           <CopyButton label="Copiar" text={v.primaryText || ""} />
                         </dd>
                       </div>
                       <div>
-                        <dt>Título</dt>
+                        <dt>
+                          Título <CharCount text={v.headline} max={ml.headline} />
+                        </dt>
                         <dd>
                           <span className="text-block">{v.headline}</span>
                           <CopyButton label="Copiar" text={v.headline || ""} />
                         </dd>
                       </div>
                       <div>
-                        <dt>Descrição</dt>
+                        <dt>
+                          Descrição <CharCount text={v.description} max={ml.description} />
+                        </dt>
                         <dd>
                           <span className="text-block">{v.description}</span>
                           <CopyButton label="Copiar" text={v.description || ""} />
                         </dd>
                       </div>
                       <div>
-                        <dt>CTA</dt>
+                        <dt>
+                          CTA <CharCount text={v.cta} max={ml.cta} />
+                        </dt>
                         <dd>
                           <span className="text-block">{v.cta}</span>
                           <CopyButton label="Copiar" text={v.cta || ""} />
@@ -259,6 +291,7 @@ export default function AdGeneratorClient() {
             <div className="platform-block">
               <h3>Google Ads (pesquisa)</h3>
               {result.google.variations.map((v) => {
+                const gl = result.limits?.google || {};
                 const headlines = (v.headlines || []).join("\n");
                 const descriptions = (v.descriptions || []).join("\n");
                 const keywords = (v.keywordIdeas || []).join(", ");
@@ -279,7 +312,10 @@ export default function AdGeneratorClient() {
                         <dd>
                           <ul className="list-lines">
                             {(v.headlines || []).map((h, i) => (
-                              <li key={i}>{h}</li>
+                              <li key={i}>
+                                {h}{" "}
+                                <CharCount text={h} max={gl.headline} />
+                              </li>
                             ))}
                           </ul>
                           <CopyButton label="Copiar headlines" text={headlines} />
@@ -290,7 +326,10 @@ export default function AdGeneratorClient() {
                         <dd>
                           <ul className="list-lines">
                             {(v.descriptions || []).map((d, i) => (
-                              <li key={i}>{d}</li>
+                              <li key={i}>
+                                {d}{" "}
+                                <CharCount text={d} max={gl.description} />
+                              </li>
                             ))}
                           </ul>
                           <CopyButton label="Copiar descrições" text={descriptions} />

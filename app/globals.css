@@ -184,9 +184,64 @@ a:hover {
   border: 1px solid #bfdbfe;
 }
 
+.results-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .results-head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
 .results h2 {
-  margin: 0 0 0.75rem;
+  margin: 0;
   font-size: 1.25rem;
+}
+
+.export-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.85rem;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.char-count {
+  font-weight: 600;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-left: 0.35rem;
+  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.char-count-over {
+  color: var(--danger-text);
 }
 
 .results h3 {
@@ -255,6 +310,10 @@ a:hover {
 }
 
 .copy-fields dt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;

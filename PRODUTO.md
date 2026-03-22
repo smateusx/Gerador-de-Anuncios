@@ -80,6 +80,10 @@ Concluído: ver **[TECH.md](TECH.md)** — stack Next.js, OpenAI, `POST /api/gen
 
 Concluído: página inicial com formulário (`components/AdGeneratorClient.js`), `POST /api/generate`, listagem de variações Meta/Google, botões copiar e avisos de políticas.
 
-## 10. Próximo passo (evolução)
+## 10. Passo 4 (exportação e limites)
 
-Exportação CSV/JSON, refinamento de UX, ou fase B (contas e histórico) conforme `TECH.md`.
+Concluído na UI: **exportar JSON/CSV** dos resultados e **contagem de caracteres** vs limites orientadores (`lib/exportResult.js`, `result.limits`).
+
+## 11. Próximo passo (evolução)
+
+Fase B (contas e histórico), testes automatizados, deploy (ex.: Vercel), ou refinamentos de UX.

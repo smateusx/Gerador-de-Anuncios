@@ -107,6 +107,11 @@ lib/
 
 Implementado em `app/page.js` + `components/AdGeneratorClient.js`: formulário, `fetch` para `POST /api/generate`, secções Meta/Google, copiar para a área de transferência, aviso de políticas e banner quando a resposta é mock.
 
-## 8. Próximas melhorias
+## 8. Passo 4 (exportação e limites)
 
-Exportação CSV/JSON, validação visual de limites de caracteres, testes e deploy (ex.: Vercel).
+- **JSON / CSV:** botões em `AdGeneratorClient` chamam `downloadResultJson` / `downloadResultCsv` em `lib/exportResult.js` (CSV com BOM UTF-8 para Excel).
+- **Caracteres:** `CharCount` compara comprimento do texto com `result.limits` (Meta e Google).
+
+## 9. Próximas melhorias
+
+Testes, deploy (ex.: Vercel), fase B (auth + BD).
