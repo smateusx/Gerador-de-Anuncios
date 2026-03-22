@@ -103,6 +103,10 @@ lib/
 
 ---
 
-## 7. Próximo passo (Passo 3)
+## 7. Passo 3 (UI)
 
-Interface: formulário alinhado a `PRODUTO.md`, chamada a `POST /api/generate`, listagem de variações, botões copiar e mensagem de políticas.
+Implementado em `app/page.js` + `components/AdGeneratorClient.js`: formulário, `fetch` para `POST /api/generate`, secções Meta/Google, copiar para a área de transferência, aviso de políticas e banner quando a resposta é mock.
+
+## 8. Próximas melhorias
+
+Exportação CSV/JSON, validação visual de limites de caracteres, testes e deploy (ex.: Vercel).

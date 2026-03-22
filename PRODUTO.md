@@ -76,6 +76,10 @@ Campos extra (landing URL, localização) podem entrar depois que o fluxo base e
 
 Concluído: ver **[TECH.md](TECH.md)** — stack Next.js, OpenAI, `POST /api/generate`, variáveis de ambiente.
 
-## 9. Próximo passo (Passo 3)
+## 9. Passo 3 (interface)
 
-Interface: formulário, chamada à API, variações, copiar/exportar e aviso de políticas.
+Concluído: página inicial com formulário (`components/AdGeneratorClient.js`), `POST /api/generate`, listagem de variações Meta/Google, botões copiar e avisos de políticas.
+
+## 10. Próximo passo (evolução)
+
+Exportação CSV/JSON, refinamento de UX, ou fase B (contas e histórico) conforme `TECH.md`.
